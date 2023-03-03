@@ -5,14 +5,12 @@ const DateBase = new Date(data.currentDate);
 
  
 //se crea un objeto que ingrese un nuevo dato que en este caso es la fecha principal para guiar si un evento es pasado o futuro.
-let tarjetasCargadas = crearTarjetas(data.events); //se busca un objeto que vea la fecha en los eventos
+let tarjetasCargadas = "";
 
-function crearTarjetas(lista) {
-  let tarjeta = "";
+let tarjetasPast = data.events.filter((eventos) => new Date(eventos.date) < DateBase);
 
-  for (let eventos of lista) {
-    if (new Date(eventos.date) < DateBase) {
-      tarjeta += `
+      tarjetasPast.forEach((eventos) => (tarjetasCargadas +=
+        `
   <div class="card event__card p-2 m-5 rounded ">
   <div class="row no-gutters">
     <div class="col-sm-5">
@@ -25,11 +23,8 @@ function crearTarjetas(lista) {
       </div>
     </div>
   </div>
-</div> `
-    }
-  }
-  return tarjeta;
-}
+</div> `)
+      )
 
 //le asignamos el valor a template(html)
 
